@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import { RaceSchema } from "../models/raceModel";
-const jwtVerification = require('../services/jwtVerification');
+import { RaceSchema } from "../models/raceModel.js";
+import { verifyJwt } from '../services/jwtVerification.js';
 const Race = mongoose.model('Race', RaceSchema);
 
 export const createRace = (req, res) => {
-    if(jwtVerification.verifyJwt(req) === true){
+    if(verifyJwt(req) === true){
         let newRace = new Race(req.body);
         newRace.save((err, race) => {
             if(err) {

@@ -1,14 +1,14 @@
 import express from 'express';
-let app = require('express')();
-let http = require('http').createServer(app);
+let app = express();
+import http from 'http';
+let server = http.createServer(app);
+
 
 import mongoose from 'mongoose';
 
 
 import { userRoutes } from "./src/routes/userRoutes.js";
 import { raceRoutes } from "./src/routes/raceRoutes.js";
-
-const PORT = 3000;
 
 
 app.use(express.urlencoded({extended: true}));
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 
-export const autoIncrement = require('mongoose-auto-increment');
+export const autoIncrement = import('mongoose-auto-increment');
 
 // mongoose connection
 mongoose.Promise = global.Promise;
@@ -39,6 +39,7 @@ userRoutes(app);
 raceRoutes(app);
 
 
-http.listen(PORT, 
-    console.log(`listening on port ${PORT}`)
+server.listen(process.env.PORT || 3000,
+    console.log(`listening`)
 );
+

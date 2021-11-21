@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { default as autopopulate } from "mongoose-autopopulate";
 
 const Schema = mongoose.Schema;
 
@@ -34,4 +35,4 @@ export const RaceSchema = new Schema({
         type: Boolean,
     }
 });
-RaceSchema.plugin(require('mongoose-autopopulate'));
+RaceSchema.plugin(autopopulate);

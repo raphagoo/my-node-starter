@@ -1,11 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-
-module.exports = {
-    verifyJwt
-};
-
-function verifyJwt(req){
+export function verifyJwt(req){
     let tokenVerified = false
     let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
     if (token.startsWith('Bearer ')) {

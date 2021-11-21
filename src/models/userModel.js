@@ -1,8 +1,9 @@
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    bcrypt = require('bcrypt'),
-    SALT_WORK_FACTOR = 10;
+import mongoose from "mongoose";
+import { default as autopopulate } from "mongoose-autopopulate";
+let Schema = mongoose.Schema;
+import bcrypt from 'bcrypt';
+let SALT_WORK_FACTOR = 10;
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -23,7 +24,7 @@ export const UserSchema = new Schema({
 });
 
 UserSchema.pre('save', function(next) {
-    var user = this;
+    let user = this;
 
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
@@ -50,5 +51,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 
-UserSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('User', UserSchema);
+UserSchema.plugin(autopopulate);
